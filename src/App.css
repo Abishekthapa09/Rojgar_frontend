@@ -145,7 +145,7 @@ li {
 /* create a job page */
 
 .create-job-flex{
-  @apply flex flex-col lg:flex-row items-center justify-between gap-8;
+@a flex flex-col lg:flex-row items-center justify-between gap-8;
 }
 
 .create-job-input{
