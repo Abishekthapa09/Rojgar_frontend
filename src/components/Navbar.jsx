@@ -14,7 +14,7 @@ const Navbar = () => {
         {path:"/post-job",title:"Post a Job"},
     ]
   return (
-   <header className=' max-w-screen-2xl container mx-auto xl:px-24 px-4'>
+   <header className=' max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white '>
     <nav className='flex justify-between items-center py-6'>
         <a href="/"> <img className=' h-16' src="/Logo.png"></img></a>
         {/* nav items for a large devices */}

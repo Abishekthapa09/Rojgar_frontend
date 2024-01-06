@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { InputField } from './InputField';
 
-const Location = (handleChange) => {
+const Location = ({handleChange}) => {
     return (
         <div>
             <h4 className='text-lg font-medium mb-2'>Location</h4>
