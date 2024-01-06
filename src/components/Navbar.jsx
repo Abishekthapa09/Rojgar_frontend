@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
+import {FaBarsStaggered, FaXmark} from "react-icons/fa6"
 
 const Navbar = () => {
-    const [isMenueOpen,setIsMenueOpen]=useState(false);
+    const [isMenuOpen,setIsMenuOpen]=useState(false);
     const handleMenueToggler=()=>{
-        setIsMenueOpen(!isMenueOpen)
+        setIsMenuOpen(!isMenuOpen)
     };
     const navItems=[
         {path:"/",title:"Start a search"},
@@ -35,7 +36,35 @@ const Navbar = () => {
             <Link to="/Login" className='py-2 px-5 border rounded'>Log In</Link>
             <Link to="/sign-up" className='py-2 px-5 border rounded bg-blue text-white'>Sign Up</Link>
         </div>
+        {/* mobile menu */}
+        <div className='md:hidden block'>
+                <button onClick={handleMenueToggler}>
+                {
+                    isMenuOpen ? <FaXmark className="w-5 h-5 text-primary"/>:<FaBarsStaggered className='w-5 h-5 text-primary '/>
+                }
+                </button>
+        </div>
     </nav>
+    {/* nav items for mobile */}
+    <div className={`px-4 bg-black py-5 rounded-sm ${isMenuOpen ? "" : "hidden"} `}>{
+        <ul>
+        {navItems.map(({path,title})=>(
+                    <li key={path} className='text-base text-white first:text-white py-1'>
+                    <NavLink
+                    to={path}
+                    className={({ isActive}) =>isActive? "active":"" }
+                  >
+                    {title}
+                  </NavLink>
+                    </li>
+          
+                )) }  
+                <li className='text-white py-1 '><Link to="/Login">Log In</Link></li>
+            <li className='text-white py-1 '><Link to="/sign-up" >Sign Up</Link></li>
+
+        </ul>
+    }
+    </div>
    </header>
   );
 };
