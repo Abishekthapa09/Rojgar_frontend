@@ -8,7 +8,7 @@ export const InputField = ({handleChange, value, title, name}) => {
                 name={name} 
                 value={value} 
                 onChange={handleChange} />
-                <span className='checkmark'></span>All
+                <span className='checkmark'></span>{title}
             </label>
     )
 }

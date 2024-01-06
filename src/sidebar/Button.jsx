@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-const Button = (onClickHandler, value, title) => {
+const Button = ({ onClickHandler, value, title }) => {
   return (
-    <button onClick={onClickHandler} value={value} className={'px-4 py-1 border text-base hover:bg-blue hover:text-white'}>
+    <>
+      <button onClick={onClickHandler} value={value} className={`px-4 py-2 border text-base hover:bg-blue hover:text-white`}>
         {title}
-    </button>
-    )
+      </button>
+    </>
+  )
 }
 
-export default Button
+
+export default Button;
