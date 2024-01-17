@@ -13,15 +13,6 @@ lerna-debug.log*
 
 # OS
 .DS_Store
-<<<<<<< HEAD
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-.env
-=======
 
 # Tests
 /coverage
@@ -44,4 +35,3 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .env
->>>>>>> main
