@@ -1,7 +1,3 @@
-import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import {FaBarsStaggered, FaXmark} from "react-icons/fa6"
-
 // import React, { Fragment, useState } from "react";
 // import { Menu, Transition } from "@headlessui/react";
 // import { BiChevronDown } from "react-icons/bi";
@@ -219,7 +215,7 @@ const Navbar = () => {
     const navItems=[
         {path:"/",title:"Start a search"},
         {path:"/my-job",title:"Jobs"},
-        {path:"/contact-us",title:"Contact Us"},
+        {path:"/about-us",title:"About Us"},
         {path:"/post-job",title:"Post a Job"},
     ]
   return (
@@ -243,7 +239,7 @@ const Navbar = () => {
         {/* sign Up and Login Button */}
         <div className='text-base text-primary font-medium space-x-5 hidden lg:block'>
             <Link to="/Login" className='py-2 px-5 border rounded'>Log In</Link>
-            <Link to="/sign-up" className='py-2 px-5 border rounded bg-blue text-white'>Register</Link>
+            <Link to="/sign-up" className='py-2 px-5 border rounded bg-primary text-white'>Register</Link>
         </div>
         {/* mobile menu */}
         <div className='md:hidden block'>
@@ -255,7 +251,7 @@ const Navbar = () => {
         </div>
     </nav>
     {/* nav items for mobile */}
-    <div className={`px-4 bg-black py-5 rounded-sm ${isMenuOpen ? "" : "hidden"} `}>{
+    <div className={`px-4 bg-tertiary py-5 rounded-sm ${isMenuOpen ? "" : "hidden"} `}>{
         <ul>
         {navItems.map(({path,title})=>(
                     <li key={path} className='text-base text-white first:text-white py-1'>
