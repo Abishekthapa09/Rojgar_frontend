@@ -27,7 +27,7 @@ function Layout() {
 function App() {
   const { user } = useSelector((state) => state.user);
   return (
-    <main className='bg-[#f7fdfd]'>
+    <main className='bg-[#fafafa]'>
       <Navbar />
 
       <Routes>
