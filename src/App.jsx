@@ -12,6 +12,7 @@ import {
   UserProfile,
 } from "./pages";
 import { useSelector } from "react-redux";
+// import Footer2 from "./components/Footer/Footer2";
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
@@ -57,6 +58,7 @@ function App() {
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>
       {user && <Footer />}
+      {/* <Footer2/> */}
     </main>
   );
 }
