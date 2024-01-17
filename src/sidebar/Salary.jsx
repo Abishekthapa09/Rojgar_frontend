@@ -9,7 +9,7 @@ const Salary = ({ handleChange, handleClick }) => {
       <div className='mb-4'>
         <Button
           onClickHandler={handleClick}
-          value=""
+          value="Hourly"
           title="Hourly"
 
         />
@@ -36,25 +36,25 @@ const Salary = ({ handleChange, handleClick }) => {
         <InputField
           handleChange={handleChange}
           value={30}
-          title="< 3000k"
+          title="< 30k"
           name="test2"
         />
         <InputField
           handleChange={handleChange}
           value={50}
-          title="< 5000k"
+          title="< 50k"
           name="test2"
         />
         <InputField
           handleChange={handleChange}
           value={80}
-          title="< 8000k"
+          title="< 80k"
           name="test2"
         />
         <InputField
           handleChange={handleChange}
           value={100}
-          title="< 10000k"
+          title="< 100k"
           name="test2"
         />
       </div>

@@ -73,6 +73,7 @@ const Home = () => {
       filteredJobs = filteredJobs.filter(
         ({
           jobLocation,
+          minPrice,
           maxPrice,
           experienceLevel,
           salaryType,
