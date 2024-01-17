@@ -215,7 +215,7 @@ const Navbar = () => {
     const navItems=[
         {path:"/",title:"Start a search"},
         {path:"/my-job",title:"Jobs"},
-        {path:"/contact-us",title:"Contact Us"},
+        {path:"/about-us",title:"About Us"},
         {path:"/post-job",title:"Post a Job"},
     ]
   return (
