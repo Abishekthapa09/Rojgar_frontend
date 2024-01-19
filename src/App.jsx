@@ -1,6 +1,6 @@
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-import { Footer, Navbar } from "./components";
+import { Footer, Header, Navbar } from "./components";
 import {
   About,
   AuthPage,
@@ -30,30 +30,17 @@ function App() {
   return (
     <main className='bg-[#fafafa]'>
       <Navbar />
-
       <Routes>
         <Route element={<Layout />}>
-          <Route
-            path='/'
-            element={<Navigate to='/find-jobs' replace={true} />}
-          />
+          <Route path='/' element={<Navigate to='/find-jobs' replace={true} />}/>
           <Route path='/find-jobs' element={<FindJobs />} />
           <Route path='/companies' element={<Companies />} />
-          <Route
-            path={
-              user?.accountType === "seeker"
-                ? "/user-profile"
-                : "/user-profile/:id"
-            }
-            element={<UserProfile />}
-          />
-
+          <Route path={user?.accountType === "seeker"? "/user-profile": "/user-profile/:id"}element={<UserProfile />}/>
           <Route path={"/company-profile"} element={<CompanyProfile />} />
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
         </Route>
-
         <Route path='/about-us' element={<About />} />
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>
