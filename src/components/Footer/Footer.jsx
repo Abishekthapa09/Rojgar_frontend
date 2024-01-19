@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer p-10 bg-tertiary text-white">
       <aside className=" -translate-y-4">
       <Link to="/">
-        <img src="/public/WhiteLogo.png" className="pl-8" alt="White Logo" width={240}></img></Link>
+        <img src="/WhiteLogo.png" className="pl-8" alt="White Logo" width={240}></img></Link>
         <header class=" text-white font-bold mx-auto text-base">Follow Us On</header>
         <div class="grid grid-flow-col gap-4 mx-auto">
           <a href="https://www.facebook.com"><FaFacebook size={28}/></a>
