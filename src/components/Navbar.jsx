@@ -213,9 +213,10 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen)
     };
     const navItems=[
-        {path:"/",title:"Start a search"},
+        // {path:"/",title:"Start a search"},
         {path:"/my-job",title:"Jobs"},
         {path:"/about-us",title:"About Us"},
+        {path:"/contact-us",title:"Contact Us"},
         {path:"/post-job",title:"Post a Job"},
     ]
   return (
