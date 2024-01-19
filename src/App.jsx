@@ -11,6 +11,7 @@ import {
   UploadJob,
   UserProfile,
 } from "./pages";
+import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 // import Footer2 from "./components/Footer/Footer2";
 
@@ -28,9 +29,11 @@ function Layout() {
 function App() {
   const { user } = useSelector((state) => state.user);
   return (
-    <main className='bg-[#fafafa]'>
-      <Navbar />
+    <>
+    <Navbar />
+    <main className='bg-Background'>
       <Routes>
+      <Route path='/' element={<Home/>} />
         <Route element={<Layout />}>
           <Route path='/' element={<Navigate to='/find-jobs' replace={true} />}/>
           <Route path='/find-jobs' element={<FindJobs />} />
@@ -47,6 +50,7 @@ function App() {
       {user && <Footer />}
       {/* <Footer2/> */}
     </main>
+    </>
   );
 }
 
