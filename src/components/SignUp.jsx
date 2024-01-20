@@ -111,8 +111,8 @@ const SignUp = ({ open, setOpen }) => {
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType === "seeker"
-                          ? "bg-[#1d4fd862] text-blue-900 font-semibold"
-                          : "bg-white border border-blue-400"
+                          ? "bg-tertiary text-white font-semibold"
+                          : "bg-white border border-primary"
                       }`}
                       onClick={() => setAccountType("seeker")}
                     >
@@ -121,8 +121,8 @@ const SignUp = ({ open, setOpen }) => {
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType !== "seeker"
-                          ? "bg-[#1d4fd862] text-blue-900 font-semibold"
-                          : "bg-white border border-blue-400"
+                          ? "bg-tertiary text-white font-semibold"
+                          : "bg-white border border-tertiary"
                       }`}
                       onClick={() => setAccountType("company")}
                     >
@@ -261,7 +261,7 @@ const SignUp = ({ open, setOpen }) => {
                     <div className='mt-2'>
                       <CustomButton
                         type='submit'
-                        containerStyles={`inline-flex justify-center rounded-md bg-blue-600 px-8 py-2 text-sm font-medium text-white outline-none hover:bg-blue-800`}
+                        containerStyles={`inline-flex justify-center rounded-md bg-primary px-8 py-2 text-sm font-medium text-white outline-none hover:bg-tertiary`}
                         title={isRegister ? "Create Account" : "Login Account"}
                       />
                     </div>
