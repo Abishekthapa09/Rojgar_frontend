@@ -26,7 +26,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className='max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white sticky top-0 z-10'>
+    <header className='max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white sticky top-0 z-10 drop-shadow-[0_4px_4px_rgba(0,0,0,0.02)]'>
       <nav className='flex justify-between items-center py-2'>
         <a href="/">
           <img className='h-16' src="/Logo.png" alt="Logo" />
