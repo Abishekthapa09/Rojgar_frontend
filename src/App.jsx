@@ -1,6 +1,7 @@
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-import { Footer, Header, Navbar } from "./components";
+import { Footer, Header, Navbar,SignUp} from "./components";
+// import SignUp from "./Pages/Auth/Signup/Signup";
 import {
   About,
   AuthPage,
@@ -43,7 +44,9 @@ function App() {
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
           <Route path={"/job-detail/:id"} element={<JobDetail />} />
+          
         </Route>
+        <Route path={"/sign-up"} element={<AuthPage />} />
         <Route path='/about-us' element={<About />} />
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>
