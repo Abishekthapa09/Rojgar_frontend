@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Office } from "../assets";
 import { SignUp } from "../components";
+import Home from "./Home";
 
 const Auth = () => {
   const { user } = useSelector((state) => state.user);
@@ -16,8 +17,7 @@ const Auth = () => {
   }
   return (
     <div className='w-full '>
-      <img src={Office} alt='Office' className='object-contain ' />
-
+    <Home/>
       <SignUp open={open} setOpen={setOpen} />
     </div>
   );
