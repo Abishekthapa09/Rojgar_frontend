@@ -57,29 +57,27 @@ const Navbar = () => {
                   {/* Dropdown content */}
                   <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Jobs by location</p>
-                    <Link to='/category1'>Jobs in Pokhara</Link>
-                    <Link to='/category2'>Jobs in Kathmandu</Link>
-                    <Link to='/category2'>Jobs in Butwal</Link>
-                    <Link to='/category2'>Jobs in Chitwan</Link>
+                    <Link to='/location/pokhara'>Jobs in Pokhara</Link>
+                    <Link to='/location/kathmandu'>Jobs in Kathmandu</Link>
+                    <Link to='/location/butwal'>Jobs in Butwal</Link>
+                    <Link to='/location/chitwan'>Jobs in Chitwan</Link>
                   </div>
                   <div className=' border-l border-gray-400 h-36 mr-5'></div>
                   <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Popular categories</p>
-                    <Link to='/category1'>IT Jobs</Link>
-                    <Link to='/category2'>Engineering Jobs</Link>
-                    <Link to='/category2'>Marketing Jobs</Link>
-                    <Link to='/category2'>Sales Jobs</Link>
+                    <Link to='/category/it'>IT Jobs</Link>
+                    <Link to='/category/engineer'>Engineering Jobs</Link>
+                    <Link to='/category/marketing'>Marketing Jobs</Link>
+                    <Link to='/category/sales'>Sales Jobs</Link>
                   </div>
                   <div className='border-l border-gray-400 h-36 mx-5'></div>
                   <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Explore more jobs</p>
-                    <Link to='/category1'>Jobs by category</Link>
-                    <Link to='/category2'>Jobs by skill</Link>
-                    <Link to='/category2'>Jobs by location</Link>
+                    <Link to='/job/category'>Jobs by category</Link>
+                    <Link to='/job/skill'>Jobs by skill</Link>
+                    <Link to='/job/location'>Jobs by location</Link>
                   </div>
                 </div>
-
-
               )}
             </li>
           ))}
