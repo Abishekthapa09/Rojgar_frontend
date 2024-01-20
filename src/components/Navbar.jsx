@@ -26,7 +26,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className='max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white sticky top-0 z-10'>
+    <header className='max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white sticky top-0 z-10 drop-shadow-[0_4px_4px_rgba(0,0,0,0.02)]'>
       <nav className='flex justify-between items-center py-2'>
         <a href="/">
           <img className='h-16' src="/Logo.png" alt="Logo" />
@@ -53,25 +53,25 @@ const Navbar = () => {
               </NavLink>
               {/* Dropdown */}
               {hasDropdown && isDropdownOpen && (
-                <div className='absolute left-1/2 transform -translate-x-1/2 mt-4 flex flex-row p-6 bg-white rounded-md drop-shadow-lg'>
+                <div className='absolute left-1/2 transform -translate-x-1/2 mt-0.5 pt-8 flex flex-row p-6 bg-gray-50 rounded-md drop-shadow-lg'>
                   {/* Dropdown content */}
-                  <div className='w-44 flex flex-col text-gray-600'>
+                  <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Jobs by location</p>
                     <Link to='/category1'>Jobs in Pokhara</Link>
                     <Link to='/category2'>Jobs in Kathmandu</Link>
                     <Link to='/category2'>Jobs in Butwal</Link>
                     <Link to='/category2'>Jobs in Chitwan</Link>
                   </div>
-                  <div className='border-l border-gray-300 h-full mx-4'></div>
-                  <div className='w-44 flex flex-col text-gray-600'>
+                  <div className=' border-l border-gray-400 h-36 mr-5'></div>
+                  <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Popular categories</p>
                     <Link to='/category1'>IT Jobs</Link>
                     <Link to='/category2'>Engineering Jobs</Link>
                     <Link to='/category2'>Marketing Jobs</Link>
                     <Link to='/category2'>Sales Jobs</Link>
                   </div>
-                  <div className='border-l border-gray-300 h-full mx-4'></div>
-                  <div className='w-44 flex flex-col text-gray-600'>
+                  <div className='border-l border-gray-400 h-36 mx-5'></div>
+                  <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Explore more jobs</p>
                     <Link to='/category1'>Jobs by category</Link>
                     <Link to='/category2'>Jobs by skill</Link>

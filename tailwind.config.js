@@ -10,7 +10,7 @@ module.exports = {
         tertiary: "#004D78",
         Black: "#1E1E1E",
         Gray: "#F5F5F5",
-        Background: "#f2f2f2",
+        Background: "#f9f9f9",
       },
     },
   },
