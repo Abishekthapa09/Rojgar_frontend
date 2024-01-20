@@ -1,277 +1,145 @@
-// import React, { Fragment, useState } from "react";
-// import { Menu, Transition } from "@headlessui/react";
-// import { BiChevronDown } from "react-icons/bi";
-// import { CgProfile } from "react-icons/cg";
-// import { HiMenuAlt3 } from "react-icons/hi";
-// import { AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
-// import { Link } from "react-router-dom";
-// import CustomButton from "./CustomButton";
-// import { users } from "../utils/data";
-// import { useDispatch, useSelector } from "react-redux";
-// import { Logout } from "../redux/userSlice";
-
-// function MenuList({ user, onClick }) {
-//   const dispatch = useDispatch();
-
-//   const handleLogout = () => {
-//     dispatch(Logout());
-//     window.location.replace("/");
-//   };
-
-//   return (
-//     <div>
-//       <Menu as='div' className='inline-block text-left'>
-//         <div className='flex'>
-//           <Menu.Button className='inline-flex gap-2 w-full rounded-md bg-white md:px-4 py-2 text-sm font-medium text-slate-700 hover:bg-opacity-20 '>
-//             <div className='leading[80px] flex flex-col items-start'>
-//               <p className='text-sm font-semibold '>
-//                 {user?.firstName ?? user?.name}
-//               </p>
-//               <span className='text-sm text-blue-600 '>
-//                 {user?.jobTitle ?? user?.email}
-//               </span>
-//             </div>
-
-//             <img
-//               src={user?.profileUrl}
-//               alt='user profile'
-//               className='w-10 h-10 rounded-full object-cover '
-//             />
-//             <BiChevronDown
-//               className='h-8 w-8 text-slate-600'
-//               aria-hidden='true'
-//             />
-//           </Menu.Button>
-//         </div>
-
-//         <Transition
-//           as={Fragment}
-//           enter='transition ease-out duration-100'
-//           enterFrom='transform opacity-0 scale-95'
-//           enterTo='transform opacity-100 scale-100'
-//           leave='transition ease-in duration-75'
-//           leaveFrom='transform opacity-100 scale-100'
-//           leaveTo='transform opacity-0 scale-95'
-//         >
-//           <Menu.Items className='absolute z-50 right-2 mt-2 w-56 origin-top-right divide-y dividfe-gray-100 rounded-md bg-white shadow-lg focus:outline-none '>
-//             <div className='p-1 '>
-//               <Menu.Item>
-//                 {({ active }) => (
-//                   <Link
-//                     to={`${
-//                       user?.accountType ? "user-profile" : "company-profile"
-//                     }`}
-//                     className={`${
-//                       active ? "bg-blue-500 text-white" : "text-gray-900"
-//                     } group flex w-full items-center rounded-md p-2 text-sm`}
-//                     onClick={onClick}
-//                   >
-//                     <CgProfile
-//                       className={`${
-//                         active ? "text-white" : "text-gray-600"
-//                       } mr-2 h-5 w-5  `}
-//                       aria-hidden='true'
-//                     />
-//                     {user?.accountType ? "User Profile" : "Company Profile"}
-//                   </Link>
-//                 )}
-//               </Menu.Item>
-
-//               <Menu.Item>
-//                 {({ active }) => (
-//                   <button
-//                     onClick={() => handleLogout()}
-//                     className={`${
-//                       active ? "bg-blue-500 text-white" : "text-gray-900"
-//                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-//                   >
-//                     <AiOutlineLogout
-//                       className={`${
-//                         active ? "text-white" : "text-gray-600"
-//                       } mr-2 h-5 w-5  `}
-//                       aria-hidden='true'
-//                     />
-//                     Log Out
-//                   </button>
-//                 )}
-//               </Menu.Item>
-//             </div>
-//           </Menu.Items>
-//         </Transition>
-//       </Menu>
-//     </div>
-//   );
-// }
-// const Navbar = () => {
-//   const {user} = useSelector((state) => state.user);
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const handleCloseNavbar = () => {
-//     setIsOpen((prev) => !prev);
-//   };
-
-//   return (
-//     <>
-//       <div className='relative bg-[#f7fdfd] z-50'>
-//         <nav className='container mx-auto flex items-center justify-between p-5'>
-//           <div>
-//             <Link to='/' className='text-blue-600 font-bold text-xl'>
-//               Job<span className='text-[#1677cccb]'>Finder</span>
-//             </Link>
-//           </div>
-
-//           <ul className='hidden lg:flex gap-10 text-base'>
-//             <li>
-//               <Link to='/'>Find Job</Link>
-//             </li>
-//             <li>
-//               <Link to='/companies'>Companies</Link>
-//             </li>
-//             <li>
-//               <Link to={user?.accountType === "seeker" ?"/applications" : '/upload-job'}>{user?.accountType === "seeker" ? "Applications" : "Upload Job"}</Link>
-//             </li>
-//             <li>
-//               <Link to='/about-us'>About</Link>
-//             </li>
-//           </ul>
-
-//           <div className='hidden lg:block'>
-//             {!user?.token ? (
-//               <Link to='/user-auth'>
-//                 <CustomButton
-//                   title='Sign In'
-//                   containerStyles='text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600'
-//                 />
-//               </Link>
-//             ) : (
-//               <div>
-//                 <MenuList user={user} />
-//               </div>
-//             )}
-//           </div>
-
-//           <button
-//             className='block lg:hidden text-slate-900'
-//             onClick={() => setIsOpen((prev) => !prev)}
-//           >
-//             {isOpen ? <AiOutlineClose size={26} /> : <HiMenuAlt3 size={26} />}
-//           </button>
-//         </nav>
-
-//         {/* MOBILE MENU */}
-//         <div
-//           className={`${
-//             isOpen ? "absolute flex bg-[#f7fdfd] " : "hidden"
-//           } container mx-auto lg:hidden flex-col pl-8 gap-3 py-5`}
-//         >
-//           <Link to='/' onClick={handleCloseNavbar}>
-//             Find Job
-//           </Link>
-//           <Link to='/companies' onClick={handleCloseNavbar}>
-//             Companies
-//           </Link>
-//           <Link
-//             onClick={handleCloseNavbar}
-//             to={
-//               user?.accountType === "seeker" ? "applly-gistory" : "upload-job"
-//             }
-//           >
-//             {user?.accountType === "seeker" ? "Applications" : "Upload Job"}
-//           </Link>
-//           <Link to='/about-us' onClick={handleCloseNavbar}>
-//             About
-//           </Link>
-
-//           <div className='w-full py-10'>
-//             {!user?.token ? (
-//               <a href='/user-auth'>
-//                 <CustomButton
-//                   title='Sign In'
-//                   containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
-//                 />
-//               </a>
-//             ) : (
-//               <div>
-//                 <MenuList user={user} onClick={handleCloseNavbar} />
-//               </div>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Navbar;
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import {FaBarsStaggered, FaXmark} from "react-icons/fa6"
+import { FaBarsStaggered, FaXmark, FaAngleUp } from 'react-icons/fa6';
 
 const Navbar = () => {
-    const [isMenuOpen,setIsMenuOpen]=useState(false);
-    const handleMenueToggler=()=>{
-        setIsMenuOpen(!isMenuOpen)
-    };
-    const navItems=[
-        // {path:"/",title:"Start a search"},
-        {path:"/my-job",title:"Jobs"},
-        {path:"/about-us",title:"About Us"},
-        {path:"/contact-us",title:"Contact Us"},
-        {path:"/post-job",title:"Post a Job"},
-    ]
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleMenuToggler = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleDropdownToggler = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const navItems = [
+    { path: '/my-job', title: 'Jobs', hasDropdown: true },
+    { path: '/about-us', title: 'About Us' },
+    { path: '/contact-us', title: 'Contact Us' },
+    { path: '/post-job', title: 'Post a Job' },
+  ];
+
   return (
-   <header className=' max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white sticky top-0 z-10 '>
-    <nav className='flex justify-between items-center py-2'>
-        <a href="/"> <img className=' h-16' src="/Logo.png"></img></a>
+    <header className='max-w-screen-2xl container mx-auto xl:px-24 px-4 bg-white sticky top-0 z-10'>
+      <nav className='flex justify-between items-center py-2'>
+        <a href="/">
+          <img className='h-16' src="/Logo.png" alt="Logo" />
+        </a>
         {/* nav items for a large devices */}
         <ul className='hidden md:flex gap-12'>
-            {navItems.map(({path,title})=>(
-                    <li key={path} className='text-base text-primary'>
-                    <NavLink
-                    to={path}
-                    className={({ isActive}) =>isActive? "active":"" }
-                  >
-                    {title}
-                  </NavLink>
-                    </li>
+          {navItems.map(({ path, title, hasDropdown }) => (
+            <li
+              key={path}
+              className={`text-tertiary relative ${hasDropdown ? 'group' : ''}`}
+              onMouseEnter={hasDropdown ? handleDropdownToggler : undefined}
+              onMouseLeave={hasDropdown ? closeDropdown : undefined}
+            >
+              <NavLink
+                to={path}
+                className={({ isActive }) => (isActive ? 'active' : '')}
+              >
+                {/* {hasDropdown && (
+                  <span className=' absolute ml-11 mt-1 hover:rotate-180'>
+                    <FaAngleUp className="text-tertiary" />
+                  </span>
+                )} */}
+                {title}
+              </NavLink>
+              {/* Dropdown */}
+              {hasDropdown && isDropdownOpen && (
+                <div className='absolute left-1/2 transform -translate-x-1/2 mt-4 flex flex-row p-6 bg-white rounded-md drop-shadow-lg'>
+                  {/* Dropdown content */}
+                  <div className='w-44 flex flex-col text-gray-600'>
+                    <p className='font-extrabold text-Black text-lg pb-2'>Jobs by location</p>
+                    <Link to='/category1'>Jobs in Pokhara</Link>
+                    <Link to='/category2'>Jobs in Kathmandu</Link>
+                    <Link to='/category2'>Jobs in Butwal</Link>
+                    <Link to='/category2'>Jobs in Chitwan</Link>
+                  </div>
+                  <div className='border-l border-gray-300 h-full mx-4'></div>
+                  <div className='w-44 flex flex-col text-gray-600'>
+                    <p className='font-extrabold text-Black text-lg pb-2'>Popular categories</p>
+                    <Link to='/category1'>IT Jobs</Link>
+                    <Link to='/category2'>Engineering Jobs</Link>
+                    <Link to='/category2'>Marketing Jobs</Link>
+                    <Link to='/category2'>Sales Jobs</Link>
+                  </div>
+                  <div className='border-l border-gray-300 h-full mx-4'></div>
+                  <div className='w-44 flex flex-col text-gray-600'>
+                    <p className='font-extrabold text-Black text-lg pb-2'>Explore more jobs</p>
+                    <Link to='/category1'>Jobs by category</Link>
+                    <Link to='/category2'>Jobs by skill</Link>
+                    <Link to='/category2'>Jobs by location</Link>
+                  </div>
+                </div>
 
-                )) }
+
+              )}
+            </li>
+          ))}
         </ul>
         {/* sign Up and Login Button */}
         <div className='text-base text-primary font-medium space-x-5 hidden lg:block'>
-            <Link to="/Login" className='py-2 px-5 border rounded'>Log In</Link>
-            <Link to="/sign-up" className='py-2 px-5 border rounded bg-primary text-white'>Register</Link>
+          <Link to='/login' className='py-2 px-5 border rounded-md'>
+            Log In
+          </Link>
+          <Link
+            to='/sign-up'
+            className='py-2 px-5 rounded-md bg-primary text-white'
+          >
+            Register
+          </Link>
         </div>
         {/* mobile menu */}
         <div className='md:hidden block'>
-                <button onClick={handleMenueToggler}>
-                {
-                    isMenuOpen ? <FaXmark className="w-5 h-5 text-primary"/>:<FaBarsStaggered className='w-5 h-5 text-primary '/>
-                }
-                </button>
+          <button onClick={handleMenuToggler}>
+            {isMenuOpen ? (
+              <FaXmark className='w-5 h-5 text-primary' />
+            ) : (
+              <FaBarsStaggered className='w-5 h-5 text-primary' />
+            )}
+          </button>
         </div>
-    </nav>
-    {/* nav items for mobile */}
-    <div className={`px-4 bg-tertiary py-5 rounded-sm ${isMenuOpen ? "" : "hidden"} `}>{
-        <ul>
-        {navItems.map(({path,title})=>(
-                    <li key={path} className='text-base text-white first:text-white py-1'>
-                    <NavLink
-                    to={path}
-                    className={({ isActive}) =>isActive? "active":"" }
-                  >
-                    {title}
-                  </NavLink>
-                    </li>
-          
-                )) }  
-                <li className='text-white py-1 '><Link to="/Login">Login</Link></li>
-            <li className='text-white py-1 '><Link to="/sign-up" >Register</Link></li>
-
-        </ul>
-    }
-    </div>
-   </header>
+      </nav>
+      {/* nav items for mobile */}
+      <div
+        className={`px-4 bg-tertiary py-5 rounded-sm ${isMenuOpen ? '' : 'hidden'
+          } `}
+      >
+        {isMenuOpen && (
+          <ul>
+            {navItems.map(({ path, title, hasDropdown }) => (
+              <li
+                key={path}
+                className={`text-base text-white first:text-white py-1 ${hasDropdown ? 'group' : ''
+                  }`}
+                onMouseEnter={hasDropdown ? handleDropdownToggler : undefined}
+                onMouseLeave={hasDropdown ? closeDropdown : undefined}
+              >
+                <NavLink
+                  to={path}
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  {title}
+                </NavLink>
+              </li>
+            ))}
+            <li className='text-white py-1 '>
+              <Link to='/Login'>Login</Link>
+            </li>
+            <li className='text-white py-1 '>
+              <Link to='/sign-up'>Register</Link>
+            </li>
+          </ul>
+        )}
+      </div>
+    </header>
   );
 };
 

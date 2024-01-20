@@ -14,6 +14,7 @@ import {
 } from "./pages";
 import Home from "./pages/Home";
 import { useSelector } from "react-redux";
+import ContactUs from "./Pages/ContactUs";
 // import Footer2 from "./components/Footer/Footer2";
 
 function Layout() {
@@ -47,6 +48,8 @@ function App() {
           
         </Route>
         <Route path={"/sign-up"} element={<AuthPage />} />
+        {/* <Route path={"/login"} element={<AuthPage/>} /> */}
+        <Route path={"/contact-us"} element={<ContactUs />} />
         <Route path='/about-us' element={<About />} />
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>
