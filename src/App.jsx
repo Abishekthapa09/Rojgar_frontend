@@ -1,6 +1,8 @@
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer, Header, Navbar,SignUp} from "./components";
+
+
 // import SignUp from "./Pages/Auth/Signup/Signup";
 import {
   About,
@@ -15,6 +17,7 @@ import {
 import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 import ContactUs from "./Pages/ContactUs";
+import Search from "./Pages/Search";
 // import Footer2 from "./components/Footer/Footer2";
 
 function Layout() {
@@ -35,7 +38,7 @@ function App() {
     <Navbar />
     <main className='bg-Background font-custom' >
       <Routes>
-      <Route path='/' element={<Home/>} />
+      <Route path='/' element={<><Home/></>} />
         <Route element={<Layout />}>
           <Route path='/' element={<Navigate to='/find-jobs' replace={true} />}/>
           <Route path='/find-jobs' element={<FindJobs />} />
@@ -44,8 +47,10 @@ function App() {
           <Route path={"/company-profile"} element={<CompanyProfile />} />
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
-          <Route path={"/job-detail/:id"} element={<JobDetail />} />  
+          <Route path={"/job-detail/:id"} element={<JobDetail />} /> 
+          <Route path={"/search-result"} element={<Search />} />
         </Route>
+        
         <Route path={"/sign-up"} element={<AuthPage />} />
         {/* <Route path={"/login"} element={<AuthPage/>} /> */}
         <Route path={"/contact-us"} element={<ContactUs />} />
