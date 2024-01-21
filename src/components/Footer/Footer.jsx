@@ -15,7 +15,7 @@ const Footer = () => {
         </div>
         <p className=" text-sm pl-6">&copy;2024.All right reserved by Rojgar.com</p>
       </aside>
-      <nav>
+      <nav className="">
         <header className="footer-title">Company</header>
         <a href="/about-us" className="link link-hover">About Us</a>
         <a href="/terms-of-use" className="link link-hover">Terms of Use</a>
