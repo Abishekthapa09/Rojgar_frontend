@@ -33,7 +33,7 @@ function App() {
   return (
     <>
     <Navbar />
-    <main className='bg-Background' >
+    <main className='bg-Background font-custom' >
       <Routes>
       <Route path='/' element={<Home/>} />
         <Route element={<Layout />}>
@@ -44,8 +44,7 @@ function App() {
           <Route path={"/company-profile"} element={<CompanyProfile />} />
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
-          <Route path={"/job-detail/:id"} element={<JobDetail />} />
-          
+          <Route path={"/job-detail/:id"} element={<JobDetail />} />  
         </Route>
         <Route path={"/sign-up"} element={<AuthPage />} />
         {/* <Route path={"/login"} element={<AuthPage/>} /> */}

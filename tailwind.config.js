@@ -3,7 +3,11 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontfamily: {
+      custom: ['Helvetica', 'Arial', 'sans-serif'],
+    },
     extend: {
+      
       colors: {
         secondary: "#2A8FBD",
         primary: "#0047AB",
