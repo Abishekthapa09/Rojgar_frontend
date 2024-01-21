@@ -33,7 +33,7 @@ function App() {
   return (
     <>
     <Navbar />
-    <main className='bg-Background' >
+    <main className='bg-Background font-custom' >
       <Routes>
       <Route path='/' element={<Home/>} />
         <Route element={<Layout />}>
