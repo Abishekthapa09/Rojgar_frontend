@@ -18,6 +18,7 @@ import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 import ContactUs from "./Pages/ContactUs";
 import Search from "./Pages/Search";
+import FraudAlert from "./Pages/FraudAlert";
 // import Footer2 from "./components/Footer/Footer2";
 
 function Layout() {
@@ -54,6 +55,7 @@ function App() {
         <Route path={"/sign-up"} element={<AuthPage />} />
         {/* <Route path={"/login"} element={<AuthPage/>} /> */}
         <Route path={"/contact-us"} element={<ContactUs />} />
+        <Route path={"/fraudalert"} element={<FraudAlert />} />
         <Route path='/about-us' element={<About />} />
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>
