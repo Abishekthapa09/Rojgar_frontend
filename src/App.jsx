@@ -53,7 +53,7 @@ function App() {
         </Route>
         
         <Route path={"/sign-up"} element={<AuthPage />} />
-        {/* <Route path={"/login"} element={<AuthPage/>} /> */}
+        <Route path={"/login"} element={<AuthPage/>} />
         <Route path={"/contact-us"} element={<ContactUs />} />
         <Route path={"/fraudalert"} element={<FraudAlert />} />
         <Route path='/about-us' element={<About />} />
