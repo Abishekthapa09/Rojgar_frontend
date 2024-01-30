@@ -17,7 +17,7 @@ const ContactUs = () => {
                 <form action="#" className=''>
                     <div className="flex flex-col md:flex-row ">
                         <div className="md:w-1/2 pr-2 ">
-                            <label for="firstName"
+                            <label htmlFor="firstName"
                                 className="block my-2 text-left 
 										text-md font-medium text-gray-900">
                                 First Name
@@ -30,7 +30,7 @@ const ContactUs = () => {
                                 required />
                         </div>
                         <div className="md:w-1/2 md:pl-2">
-                            <label for="firstName"
+                            <label htmlFor="firstName"
                                 className="block my-2 text-left text-md 
 										font-medium text-gray-900">
                                 Last Name
@@ -43,7 +43,7 @@ const ContactUs = () => {
                         </div>
                     </div>
                     <div>
-                        <label for="email"
+                        <label htmlFor="email"
                             className="block my-2 text-left text-md 
 									font-medium text-gray-900">
                             Your email
@@ -56,7 +56,7 @@ const ContactUs = () => {
                             required />
                     </div>
                     <div>
-                        <label for="subject"
+                        <label htmlFor="subject"
                             className="block my-2 text-left 
 									text-md font-medium text-gray-900">
                             Subject
@@ -69,7 +69,7 @@ const ContactUs = () => {
                             required />
                     </div>
                     <div >
-                        <label for="message"
+                        <label htmlFor="message"
                             className="block my-2 text-left 
 									text-md font-medium text-gray-900 ">
                             Your message
