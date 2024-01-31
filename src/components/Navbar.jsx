@@ -203,7 +203,7 @@ const Navbar = () => {
               <Link to='/user-auth'>
                 <CustomButton
                   title='Sign In'
-                  containerStyles='text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600'
+                  containerStyles='text-primary py-1.5 px-5 focus:outline-none hover:bg-primary hover:text-white rounded-md text-base border border-primary'
                 />
               </Link>
             ) : (
@@ -247,12 +247,12 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
-            <li className='text-white py-1 '>
+            {/* <li className='text-white py-1 '>
               <Link to='/login'>Login</Link>
             </li>
             <li className='text-white py-1 '>
               <Link to='/sign-up'>Register</Link>
-            </li>
+            </li> */}
           </ul>
         )}
       </div>
