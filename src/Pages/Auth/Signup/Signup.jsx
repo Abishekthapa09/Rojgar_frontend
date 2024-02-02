@@ -261,7 +261,7 @@
 //                     <div className='mt-2'>
 //                       <CustomButton
 //                         type='submit'
-//                         containerStyles={`inline-flex justify-center rounded-md bg-blue-600 px-8 py-2 text-sm font-medium text-white outline-none hover:bg-blue-800`}
+//                         containerStyles={`inline-flex justify-center rounded-md bg-primary px-8 py-2 text-sm font-medium text-white outline-none hover:bg-primary`}
 //                         title={isRegister ? "Create Account" : "Login Account"}
 //                       />
 //                     </div>
@@ -274,7 +274,7 @@
 //                         : "Do not have an account"}
 
 //                       <span
-//                         className='text-sm text-blue-600 ml-2 hover:text-blue-700 hover:font-semibold cursor-pointer'
+//                         className='text-sm text-primary ml-2 hover:text-primary hover:font-semibold cursor-pointer'
 //                         onClick={() => setIsRegister((prev) => !prev)}
 //                       >
 //                         {isRegister ? "Login" : "Create Account"}

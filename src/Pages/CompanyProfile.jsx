@@ -10,6 +10,8 @@ import { companies, jobs } from "../utils/data";
 import { CustomButton, JobCard, Loading, TextInput } from "../components";
 import { apiRequest, handleFileUpload } from "../utils";
 
+
+
 const CompnayForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
   const {
@@ -33,11 +35,11 @@ const CompnayForm = ({ open, setOpen }) => {
     setIsLoading(true);
     setErrMsg(null);
 
-    const uri = profileImage && ( await handleFileUpload(profileImage));
+    const uri = profileImage && (await handleFileUpload(profileImage));
 
-    const newData = uri ? { ...data, profileUrl: uri} : data;
+    const newData = uri ? { ...data, profileUrl: uri } : data;
 
-    try{
+    try {
       const res = await apiRequest({
         url: "/companies/update-company",
         token: user?.token,
@@ -48,21 +50,21 @@ const CompnayForm = ({ open, setOpen }) => {
 
       // console.log(res);
 
-      if(res.status === "failed"){
+      if (res.status === "failed") {
         setErrMsg({ ...res });
       }
-      else{
+      else {
         setErrMsg({ status: "success", message: res.message });
-        const newData = {token: res?.token, ...res?.user};
+        const newData = { token: res?.token, ...res?.user };
         dispatch(Login(newData));
         localStorage.setItem("userInfo", JSON.stringify(data));
 
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.reload();
         }, 1500);
       }
     }
-    catch (error){
+    catch (error) {
       console.log(error);
       setIsLoading(false);
     }
@@ -123,7 +125,7 @@ const CompnayForm = ({ open, setOpen }) => {
                     <TextInput
                       name='location'
                       label='Location/Address'
-                      placeholder='eg. Califonia'
+                      placeholder='eg. Pokhara'
                       type='text'
                       register={register("location", {
                         required: "Address is required",
@@ -161,7 +163,7 @@ const CompnayForm = ({ open, setOpen }) => {
                         About Company
                       </label>
                       <textarea
-                        className='ounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none'
+                        className='ounded border border-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-base px-4 py-2 resize-none'
                         rows={4}
                         cols={6}
                         {...register("about", {
@@ -183,10 +185,10 @@ const CompnayForm = ({ open, setOpen }) => {
                       {
                         isLoading ? (
                           <Loading />
-                        ):(
+                        ) : (
                           <CustomButton
                             type='submit'
-                            containerStyles='inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none '
+                            containerStyles='inline-flex justify-center rounded-md border border-transparent bg-primary px-8 py-2 text-sm font-medium text-white hover:bg-tertiary hover:text-white focus:outline-none '
                             title={"Submit"}
                           />
                         )
@@ -210,18 +212,18 @@ const CompanyProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [openForm, setOpenForm] = useState(false);
 
-  const fetchCompany = async ()=>{
+  const fetchCompany = async () => {
     setIsLoading(true);
     let id = null;
 
-    if(params.id && params.id !== undefined){
+    if (params.id && params.id !== undefined) {
       id = params?.id;
     }
-    else{
-      id= user?._id;
+    else {
+      id = user?._id;
     }
 
-    try{
+    try {
       const res = await apiRequest({
         url: "/companies/get-company/" + id,
         method: "GET",
@@ -230,7 +232,7 @@ const CompanyProfile = () => {
       setInfo(res?.data);
       setIsLoading(false);
     }
-    catch (error){
+    catch (error) {
       console.log(error);
       setIsLoading(false);
     }
@@ -259,14 +261,14 @@ const CompanyProfile = () => {
                 <CustomButton
                   onClick={() => setOpenForm(true)}
                   iconRight={<FiEdit3 />}
-                  containerStyles={`py-1.5 px-3 md:px-5 focus:outline-none bg-blue-600  hover:bg-blue-700 text-white rounded text-sm md:text-base border border-blue-600`}
+                  containerStyles={`py-1.5 px-3 md:px-5 focus:outline-none bg-primary  hover:bg-primary text-white rounded text-sm md:text-base border border-primary`}
                 />
 
                 <Link to='/upload-job'>
                   <CustomButton
                     title='Upload Job'
                     iconRight={<FiUpload />}
-                    containerStyles={`text-blue-600 py-1.5 px-3 md:px-5 focus:outline-none  rounded text-sm md:text-base border border-blue-600`}
+                    containerStyles={`text-primary py-1.5 px-3 md:px-5 focus:outline-none  rounded text-sm md:text-base border border-primary`}
                   />
                 </Link>
               </div>
@@ -286,7 +288,7 @@ const CompanyProfile = () => {
 
           <div className='flex flex-col items-center mt-10 md:mt-0'>
             <span className='text-xl'>{info?.jobPosts?.length}</span>
-            <p className='text-blue-600 '>Job Post</p>
+            <p className='text-primary '>Job Post</p>
           </div>
         </div>
       </div>

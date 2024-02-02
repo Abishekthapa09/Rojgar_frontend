@@ -59,6 +59,7 @@ const SignUp = ({ open, setOpen }) => {
         data: data,
         method: "POST",
       });
+      console.log(res);
 
       if(res?.status === "failed"){
         setErrMsg(res?.message);
@@ -68,7 +69,7 @@ const SignUp = ({ open, setOpen }) => {
         const data = { token: res?.token, ...res?.user };
         dispatch(Login(data));
         localStorage.setItem("userInfo", JSON.stringify(data));
-        window.location.replace(from);
+        // window.location.replace(from);
       }
     }
     catch(error){
@@ -167,7 +168,7 @@ const SignUp = ({ open, setOpen }) => {
                             }
                             placeholder={
                               accountType === "seeker"
-                                ? "eg. James"
+                                ? "Enter your firstname"
                                 : "Comapy name"
                             }
                             type='text'
@@ -197,7 +198,7 @@ const SignUp = ({ open, setOpen }) => {
                             <TextInput
                               name='lastName'
                               label='Last Name'
-                              placeholder='Wagonner'
+                              placeholder='Enter your lastname'
                               type='text'
                               register={register("lastName", {
                                 required: "Last Name is required",
@@ -278,7 +279,7 @@ const SignUp = ({ open, setOpen }) => {
                         : "Do not have an account"}
 
                       <span
-                        className='text-sm text-blue-600 ml-2 hover:text-blue-700 hover:font-semibold cursor-pointer'
+                        className='text-sm text-primary ml-2 hover:text-primary hover:font-semibold cursor-pointer'
                         onClick={() => setIsRegister((prev) => !prev)}
                       >
                         {isRegister ? "Login" : "Create Account"}

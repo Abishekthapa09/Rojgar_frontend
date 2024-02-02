@@ -11,6 +11,8 @@ import Office from "./office.jpg";
 import JobImg from "./job.jpg";
 import Facebook from "./facebook.png";
 import CodeWave from "./codewave.png";
+import Logo from "./Logo.png";
+import Hero from "./4565.jpg";
 
 export {
   CodeWave,
@@ -26,4 +28,6 @@ export {
   Youtube,
   Office,
   JobImg,
+  Logo,
+  Hero
 };

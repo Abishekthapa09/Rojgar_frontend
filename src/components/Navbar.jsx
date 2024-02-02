@@ -12,9 +12,11 @@ import CustomButton from "./CustomButton";
 function MenuList({ user, onClick }) {
   const dispatch = useDispatch();
 
+
   const handleLogout = () => {
     dispatch(Logout());
     window.location.replace("/");
+ 
   };
 
   return (
@@ -26,7 +28,7 @@ function MenuList({ user, onClick }) {
               <p className='text-sm font-semibold '>
                 {user?.firstName ?? user?.name}
               </p>
-              <span className='text-sm text-blue-600 '>
+              <span className='text-sm text-primary '>
                 {user?.jobTitle ?? user?.email}
               </span>
             </div>
@@ -61,7 +63,7 @@ function MenuList({ user, onClick }) {
                       user?.accountType ? "user-profile" : "company-profile"
                     }`}
                     className={`${
-                      active ? "bg-blue-500 text-white" : "text-gray-900"
+                      active ? "bg-primary text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md p-2 text-sm`}
                     onClick={onClick}
                   >
@@ -81,7 +83,7 @@ function MenuList({ user, onClick }) {
                   <button
                     onClick={() => handleLogout()}
                     className={`${
-                      active ? "bg-blue-500 text-white" : "text-gray-900"
+                      active ? "bg-primary text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     <AiOutlineLogout
@@ -90,7 +92,7 @@ function MenuList({ user, onClick }) {
                       } mr-2 h-5 w-5  `}
                       aria-hidden='true'
                     />
-                    Log Out
+                    Sign Out
                   </button>
                 )}
               </Menu.Item>
@@ -119,12 +121,15 @@ const Navbar = () => {
   const closeDropdown = () => {
     setIsDropdownOpen(false);
   };
+  const closeMobileMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   const navItems = [
     { path: '/find-jobs', title: 'Jobs', hasDropdown: true },
     { path: '/about-us', title: 'About Us' },
     { path: '/contact-us', title: 'Contact Us' },
-    { path: user?.accountType === "seeker" ?"/applications" : '/upload-job', title: user?.accountType === "seeker" ? "Applications" : 'Post a Job' },
+    { path: user?.accountType === "seeker" ?"/applications" : '/upload-job', title: user?.accountType === "seeker" ? "Applications" : "Post Job" },
   ];
 
   // <Link to={user?.accountType === "seeker" ?"/applications" : '/upload-job'}>{user?.accountType === "seeker" ? "Applications" : "Upload Job"}</Link>
@@ -146,6 +151,7 @@ const Navbar = () => {
               <NavLink
                 to={path}
                 className={({ isActive }) => (isActive ? 'active' : '')}
+                
               >
                 {/* {hasDropdown && (
                   <span className=' absolute ml-11 mt-1 hover:rotate-180'>
@@ -160,25 +166,25 @@ const Navbar = () => {
                   {/* Dropdown content */}
                   <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Jobs by location</p>
-                    <Link to='/location/pokhara'>Jobs in Pokhara</Link>
-                    <Link to='/location/kathmandu'>Jobs in Kathmandu</Link>
-                    <Link to='/location/butwal'>Jobs in Butwal</Link>
-                    <Link to='/location/chitwan'>Jobs in Chitwan</Link>
+                    <Link to='/find-jobs'>Jobs in Pokhara</Link>
+                    <Link to='/find-jobs'>Jobs in Kathmandu</Link>
+                    <Link to='/find-jobs'>Jobs in Butwal</Link>
+                    <Link to='/find-jobs'>Jobs in Chitwan</Link>
                   </div>
                   <div className=' border-l border-gray-400 h-36 mr-5'></div>
                   <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Popular categories</p>
-                    <Link to='/category/it'>IT Jobs</Link>
-                    <Link to='/category/engineer'>Engineering Jobs</Link>
-                    <Link to='/category/marketing'>Marketing Jobs</Link>
-                    <Link to='/category/sales'>Sales Jobs</Link>
+                    <Link to='/find-jobs'>IT Jobs</Link>
+                    <Link to='/find-jobs'>Engineering Jobs</Link>
+                    <Link to='/find-jobs'>Marketing Jobs</Link>
+                    <Link to='/find-jobs'>Sales Jobs</Link>
                   </div>
                   <div className='border-l border-gray-400 h-36 mx-5'></div>
                   <div className='w-44 flex flex-col text-gray-500'>
                     <p className='font-extrabold text-Black text-lg pb-2'>Explore more jobs</p>
-                    <Link to='/job/category'>Jobs by category</Link>
-                    <Link to='/job/skill'>Jobs by skill</Link>
-                    <Link to='/job/location'>Jobs by location</Link>
+                    <Link to='/find-jobs'>Jobs by category</Link>
+                    <Link to='/find-jobs'>Jobs by skill</Link>
+                    <Link to='/find-jobs'>Jobs by location</Link>
                   </div>
                 </div>
               )}
@@ -186,7 +192,7 @@ const Navbar = () => {
           ))}
         </ul>
         {/* sign Up and Login Button */}
-        {/* <div className='text-base text-primary font-medium space-x-5 hidden lg:block'>
+         {/* <div className='text-base text-primary font-medium space-x-5 hidden lg:block'>
           <Link to='/login' className='py-2 px-5 border rounded-md'>
             Log In
           </Link>
@@ -196,19 +202,19 @@ const Navbar = () => {
           >
             Register
           </Link>
-        </div> */}
+        </div>  */}
 
-        <div className='hidden lg:block'>
+        <div className='hidden md:block'>
             {!user?.token ? (
               <Link to='/user-auth'>
                 <CustomButton
                   title='Sign In'
-                  containerStyles='text-primary py-1.5 px-5 focus:outline-none hover:bg-primary hover:text-white rounded-md text-base border border-primary'
+                  containerStyles='text-primary py-1.5 px-5 focus:outline-none hover:bg-primary hover:text-white rounded-lg text-base border border-primary'
                 />
               </Link>
             ) : (
               <div>
-                <MenuList user={user} />
+                <MenuList user={user} closeDropdown={closeDropdown} />
               </div>
             )}
           </div>
@@ -227,7 +233,7 @@ const Navbar = () => {
       {/* nav items for mobile */}
       <div
         className={`px-4 bg-tertiary py-5 rounded-sm ${isMenuOpen ? '' : 'hidden'
-          } `}
+          } `} 
       >
         {isMenuOpen && (
           <ul>
@@ -242,17 +248,18 @@ const Navbar = () => {
                 <NavLink
                   to={path}
                   className={({ isActive }) => (isActive ? 'active' : '')}
+                  onClick={closeMobileMenu}
                 >
                   {title}
                 </NavLink>
               </li>
             ))}
             {/* <li className='text-white py-1 '>
-              <Link to='/login'>Login</Link>
-            </li>
-            <li className='text-white py-1 '>
-              <Link to='/sign-up'>Register</Link>
+              <Link to='/user- auth'>Signin</Link>
             </li> */}
+            <li className='text-white py-1 '>
+              <Link to='/user-auth' onClick={closeMobileMenu}>Sign In</Link>
+            </li>
           </ul>
         )}
       </div>
