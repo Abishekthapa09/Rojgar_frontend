@@ -29,10 +29,14 @@ const UserForm = ({ open, setOpen }) => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    try{
-      const url = profileImage && (await handleFileUpload(profileImage));
+    try {
+      const uri = profileImage && (await handleFileUpload(profileImage));
 
-      const newData = uri ? {...data, profileImage: uri } : data;
+      const cvUrl = uploadCv && (await handleFileUpload(uploadCv));
+
+      const newData = uri && cvUrl ? { ...data, profileUrl: uri, cvUrl: cvUrl } : data;
+
+      console.log(newData);
 
       const res = await apiRequest({
         url: "/users/update-user",
@@ -41,15 +45,15 @@ const UserForm = ({ open, setOpen }) => {
         method: "PUT",
       });
 
-      if (res){
-        const newData = {token: res?.token, ...res?.user};
+      if (res) {
+        const newData = { token: res?.token, ...res?.user };
         dispatch(Login(newData));
         localStorage.setItem("userInfo", JSON.stringify(res));
         window.location.reload();
       }
       setIsSubmitting(false);
     }
-    catch (error){
+    catch (error) {
       setIsSubmitting(false);
       console.log(error);
     }
@@ -100,7 +104,7 @@ const UserForm = ({ open, setOpen }) => {
                         <TextInput
                           name='firstName'
                           label='First Name'
-                          placeholder='James'
+                          placeholder='Enter your firstname'
                           type='text'
                           register={register("firstName", {
                             required: "First Name is required",
@@ -114,7 +118,7 @@ const UserForm = ({ open, setOpen }) => {
                         <TextInput
                           name='lastName'
                           label='Last Name'
-                          placeholder='Wagonner'
+                          placeholder='Enter your lastname'
                           type='text'
                           register={register("lastName", {
                             required: "Last Name is required",
@@ -159,7 +163,7 @@ const UserForm = ({ open, setOpen }) => {
                     <TextInput
                       name='jobTitle'
                       label='Job Title'
-                      placeholder='Software Engineer'
+                      placeholder='eg:Software Engineer'
                       type='text'
                       register={register("jobTitle", {
                         required: "Job Title is required",
@@ -193,7 +197,7 @@ const UserForm = ({ open, setOpen }) => {
                         About
                       </label>
                       <textarea
-                        className='ounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none'
+                        className='ounded border border-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-base px-4 py-2 resize-none'
                         rows={4}
                         cols={6}
                         {...register("about", {
@@ -219,10 +223,10 @@ const UserForm = ({ open, setOpen }) => {
                         ) : (
                           <CustomButton
                             type='submit'
-                            containerStyles='inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none '
+                            containerStyles='inline-flex justify-center rounded-md border border-transparent bg-primary px-8 py-2 text-sm font-medium text-white hover:bg-tertiary hover:text-primary focus:outline-none '
                             title={"Submit"}
                           />
-                          )
+                        )
                       }
                     </div>
                   </form>
@@ -242,18 +246,32 @@ const UserProfile = () => {
   const userInfo = user;
 
   return (
-    <div className='container mx-auto flex items-center justify-center py-10'>
+    <div className='container mx-auto flex items-center justify-center py-2'>
       <div className='w-full md:w-2/3 2xl:w-2/4 bg-white shadow-lg p-10 pb-20 rounded-lg'>
-        <div className='flex flex-col items-center justify-center mb-4'>
-          <h1 className='text-4xl font-semibold text-slate-600'>
-            {userInfo?.firstName + " " + userInfo?.lastName}
-          </h1>
+        <div className='flex flex-col  mb-4'>
+          <div className="grid grid-cols-2">
+            <div><img
+              src={userInfo?.profileUrl || NoProfile}
+              alt={userInfo?.firstName}
+              className='w-full h-48 object-contain rounded-lg'
+            /></div>
+            <div className=" my-auto"><h1 className='text-4xl font-semibold text-slate-600'>
+              {userInfo?.firstName + " " + userInfo?.lastName}
+            </h1>
 
-          <h5 className='text-blue-700 text-base font-bold'>
-            {userInfo?.jobTitle || "Add Job Title"}
-          </h5>
+              <h5 className='text-primary text-base font-bold '>
+                {userInfo?.jobTitle || "Add Job Title"}
+              </h5>
+              <button
+                className='w-full md:w-64 bg-primary text-white mt-4 py-2 rounded'
+                onClick={() => setOpen(true)}
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
 
-          <div className='w-full flex flex-wrap lg:flex-row justify-between mt-8 text-sm'>
+          <div className='w-full flex flex-wrap lg:flex-row  items-center justify-between mt-8 text-sm'>
             <p className='flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full'>
               <HiLocationMarker /> {userInfo?.location ?? "No Location"}
             </p>
@@ -268,27 +286,23 @@ const UserProfile = () => {
 
         <hr />
 
-        <div className='w-full py-10'>
-          <div className='w-full flex flex-col-reverse md:flex-row gap-8 py-6'>
+        <div className='w-full py-2'>
+          <div className='w-full flex flex-col-reverse md:flex-col gap-8 py-6'>
             <div className='w-full md:w-2/3 flex flex-col gap-4 text-lg text-slate-600 mt-20 md:mt-0'>
-              <p className='text-[#0536e7]  font-semibold text-2xl'>ABOUT</p>
+              <p className='text-primary  font-semibold text-2xl'>ABOUT</p>
               <span className='text-base text-justify leading-7'>
                 {userInfo?.about ?? "No About Found"}
               </span>
             </div>
 
+            <div>
+              <h1 className="font-semibold text-2xl text-primary">My CV</h1>
+              <iframe title="PDF Viewer" width="100%" height="600" src={userInfo?.cvUrl} className=" drop-shadow-md"></iframe>
+            </div>
+
             <div className='w-full md:w-1/3 h-44'>
-              <img
-                src={userInfo?.profileUrl || NoProfile}
-                alt={userInfo?.firstName}
-                className='w-full h-48 object-contain rounded-lg'
-              />
-              <button
-                className='w-full md:w-64 bg-blue-600 text-white mt-4 py-2 rounded'
-                onClick={() => setOpen(true)}
-              >
-                Edit Profile
-              </button>
+
+             
             </div>
           </div>
         </div>

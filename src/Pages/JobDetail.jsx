@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import { Linkedin } from "../assets";
 import moment from "moment";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { jobs } from "../utils/data";
 import { CustomButton, JobCard, Loading } from "../components";
 import { useSelector } from "react-redux";
 import { apiRequest } from "../utils";
+import {toast} from "react-toastify";
 
 const JobDetail = () => {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const { user } = useSelector((state)=>state.user);
   
@@ -63,6 +66,49 @@ const JobDetail = () => {
     }
   }
 
+  //apply for job
+  const applyForJob = async ()=>{
+    setIsFetching(true);
+
+    if(user.cvUrl || user.cvDetails){
+
+      //api request to apply for the job
+      try {
+        console.log("cv is already uploaded!");
+
+        const res = await apiRequest({
+          url: `/jobs/${job._id}/apply`,
+          token: user?.token,
+          data: {userId: user._id},
+          method: "PUT",
+        });
+
+        //call api of job to update the applicants
+
+        toast.success(res.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
+
+        setIsFetching(false);
+        
+      } catch (error) {
+        console.log(error);
+        setIsFetching(false);
+      }
+
+    }
+    else{
+      navigate("/user/upload-cv");
+    }
+  }
+
   useEffect(() => {
     id && getJobDetails();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -80,8 +126,8 @@ const JobDetail = () => {
           <div className='w-full flex items-center justify-between'>
             <div className='w-3/4 flex gap-2'>
               <img
-                src={job?.logo}
-                alt={job?.name}
+                src={job?.company?.profileUrl}
+                alt={job?.company?.name}
                 className='w-20 h-20 md:w-24 md:h-20 rounded'
               />
 
@@ -92,7 +138,7 @@ const JobDetail = () => {
 
                 <span className='text-base'>{job?.location}</span>
 
-                <span className='text-base text-blue-600'>
+                <span className='text-base text-primary'>
                   {job?.company?.name}
                 </span>
 
@@ -103,46 +149,54 @@ const JobDetail = () => {
             </div>
 
             <div className=''>
-              <AiOutlineSafetyCertificate className='text-3xl text-blue-500' />
+              <AiOutlineSafetyCertificate className='text-3xl text-primary' />
             </div>
           </div>
 
-          <div className='w-full flex flex-wrap md:flex-row gap-2 items-center justify-between my-10'>
-            <div className='bg-[#bdf4c8] w-40 h-16 rounded-lg flex flex-col items-center justify-center'>
+          <div className='w-full flex flex-wrap md:flex-row gap-1 items-center justify-between my-10'>
+            <div className='bg-tertiary/15 w-32 h-16 rounded-lg flex flex-col items-center justify-center'>
               <span className='text-sm'>Salary</span>
               <p className='text-lg font-semibold text-gray-700'>
                 $ {job?.salary}
               </p>
             </div>
 
-            <div className='bg-[#bae5f4] w-40 h-16 rounded-lg flex flex-col items-center justify-center'>
+            <div className='bg-primary/15 w-36 h-16 rounded-lg flex flex-col items-center justify-center'>
               <span className='text-sm'>Job Type</span>
               <p className='text-lg font-semibold text-gray-700'>
                 {job?.jobType}
               </p>
             </div>
 
-            <div className='bg-[#fed0ab] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center'>
-              <span className='text-sm'>No. of Applicants</span>
+            <div className='bg-tertiary/15 w-36 h-16 px-4 rounded-lg flex flex-col items-center justify-center'>
+              <span className='text-sm'>Applicants</span>
               <p className='text-lg font-semibold text-gray-700'>
                 {job?.application?.length || 0}
               </p>
             </div>
 
-            <div className='bg-[#cecdff] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center'>
-              <span className='text-sm'>No. of Vacancies</span>
+            <div className='bg-primary/15 w-36 h-16 px-4 rounded-lg flex flex-col items-center justify-center'>
+              <span className='text-sm'>Vacancies</span>
               <p className='text-lg font-semibold text-gray-700'>
                 {job?.vacancies}
               </p>
             </div>
 
-            <div className='bg-[#ffcddf] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center'>
-              <span className='text-sm'>Yr. of Experience</span>
+            <div className='bg-tertiary/15 w-36 h-16 px-4 rounded-lg flex flex-col items-center justify-center'>
+              <span className='text-sm'>Experience(Year)</span>
               <p className='text-lg font-semibold text-gray-700'>
                 {job?.experience}
               </p>
             </div>
           </div>
+
+          {/*view applicants button*/}
+          {
+            user?.accountType !== "seeker" && job?.application?.length != 0 &&
+              <Link to={"applicants"}>
+                <CustomButton title={"View Applicants"} containerStyles={' text-primary px-6 py-3 border border-primary rounded-full hover:bg-primary duration-300 transition-all hover:text-white'}/>
+              </Link>
+          }
 
           <div className='w-full flex gap-4 py-5'>
             <CustomButton
@@ -150,8 +204,8 @@ const JobDetail = () => {
               title='Job Description'
               containerStyles={`w-full flex items-center justify-center py-3 px-5 outline-none rounded-full text-sm ${
                 selected === "0"
-                  ? "bg-black text-white"
-                  : "bg-white text-black border border-gray-300"
+                  ? "bg-tertiary text-white"
+                  : "bg-white text-black border border-tertiary"
               }`}
             />
 
@@ -160,8 +214,8 @@ const JobDetail = () => {
               title='Company'
               containerStyles={`w-full flex items-center justify-center  py-3 px-5 outline-none rounded-full text-sm ${
                 selected === "1"
-                  ? "bg-black text-white"
-                  : "bg-white text-black border border-gray-300"
+                  ? "bg-tertiary text-white"
+                  : "bg-white text-black border border-tertiary"
               }`}
             />
           </div>
@@ -185,7 +239,7 @@ const JobDetail = () => {
             ) : (
               <>
                 <div className='mb-6 flex flex-col'>
-                  <p className='text-xl text-blue-600 font-semibold'>
+                  <p className='text-xl text-primary font-semibold'>
                     {job?.company?.name}
                   </p>
                   <span className='text-base'>{job?.company?.location}</span>
@@ -204,14 +258,27 @@ const JobDetail = () => {
                 <CustomButton
                   title='Delete Post'
                   onClick={handleDeletePost}
-                  containerStyles={`w-full flex items-center justify-center text-white bg-red-700 py-3 px-5 outline-none rounded-full text-base`}
+                  containerStyles={`w-full flex items-center justify-center text-white bg-red-900 py-3 px-5 outline-none rounded-full text-base`}
                 />
-              ):(
-                <CustomButton
-                  title='Apply Now'
-                  containerStyles={`w-full flex items-center justify-center text-white bg-black py-3 px-5 outline-none rounded-full text-base`}
-                />
-              )
+              ):<>
+              {
+                isFetching ? 
+                  <Loading /> 
+                   :
+                   job?.application.includes(user._id)?
+                    <CustomButton
+                      title={"Already Applied"}
+                      containerStyles={`w-full flex items-center justify-center text-white bg-red-700 py-3 px-5 outline-none rounded-full text-base`}
+                    />
+                      :
+                    <CustomButton
+                      title={'Apply Now'}
+                      containerStyles={`w-full flex items-center justify-center text-white bg-primary py-3 px-5 outline-none rounded-full text-base`}
+                      onClick={applyForJob}
+                    />
+              }
+              
+              </>
             }
           </div>
         </div>)}

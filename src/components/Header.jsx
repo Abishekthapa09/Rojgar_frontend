@@ -3,7 +3,7 @@ import { AiOutlineSearch, AiOutlineCloseCircle } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import CustomButton from "./CustomButton";
 import { popularSearch } from "../utils/data";
-import { HeroImage } from "../assets";
+import { HeroImage, Hero } from "../assets";
 
 const SearchInput = ({ placeholder, icon, value, setValue, styles }) => {
   const handleChange = (e) => {
@@ -73,7 +73,7 @@ const Header = ({
                 onClick={handleClick}
                 title='Search'
                 containerStyles={
-                  "text-white py-2 md:py3 px-3 md:px-10 focus:outline-none bg-blue-600 rounded-full md:rounded-md text-sm md:text-base"
+                  "text-white py-2 md:py3 px-3 md:px-10 focus:outline-none bg-primary rounded-full md:rounded-md text-sm md:text-base"
                 }
               />
             </div>
@@ -94,7 +94,7 @@ const Header = ({
         </div>
 
         <div className='w-1/3 h-full absolute top-24 md:-top-6 lg:-top-14 right-16 2xl:right-[18rem]'>
-          <img src={HeroImage} className='object-contain' />
+          <img src={Hero} className='object-contain' />
         </div>
       </div>
     </div>

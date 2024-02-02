@@ -69,7 +69,7 @@ const Companies = () => {
         setLocation={setCmpLocation}
       />
 
-      <div className='container mx-auto flex flex-col gap-5 2xl:gap-10 px-5 py-6 bg-[#f7fdfd]'>
+      <div className='container mx-auto flex flex-col gap-5 2xl:gap-10 px-5 py-6 bg-Background'>
         <div className='flex items-center justify-between mb-4'>
           <p className='text-sm md:text-base'>
             Showing: <span className='font-semibold'>{recordsCount}</span> Companies
@@ -104,7 +104,7 @@ const Companies = () => {
             <CustomButton
               onClick={handleShowMore}
               title='Load More'
-              containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
+              containerStyles={`text-primary py-1.5 px-5 focus:outline-none hover:bg-primary hover:text-white rounded-full text-base border border-primary`}
             />
           </div>
         )}

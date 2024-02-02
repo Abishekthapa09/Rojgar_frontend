@@ -70,11 +70,11 @@ export const updateURL = ({
         params.set("sort", sort);
     }
 
-    if(jType){
+    if(jType && jType.length!=0){
         params.set("jType", jType);
     }
 
-    if(exp){
+    if(exp && exp.length!=0){
         params.set("exp", exp);
     }
 

@@ -4,6 +4,7 @@ import { CustomButton, JobCard, JobTypes, Loading, TextInput } from "../componen
 import { jobs } from "../utils/data";
 import { useSelector } from "react-redux";
 import { apiRequest } from "../utils";
+import SelectCategory from "../components/SelectCategory";
 
 const UploadJob = () => {
   const { user } = useSelector((state)=>state.user);
@@ -29,6 +30,8 @@ const UploadJob = () => {
     setErrMsg(null);
 
     const newData = {...data, jobType: jobType};
+
+    console.log(newData);
 
     try{
       const res = await apiRequest({
@@ -77,6 +80,17 @@ const UploadJob = () => {
     getRecentPost();
   },[]);
 
+  const jobCategories = [
+    'Information Technology',
+    'Healthcare',
+    'Finance',
+    'Sales and Marketing',
+    'Education',
+    'Engineering',
+    'Customer Service',
+    'Human Resources',
+  ];
+
   return (
     <div className='container mx-auto flex flex-col md:flex-row gap-8 2xl:gap-14 bg-[#f7fdfd] px-5'>
       <div className='w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md'>
@@ -99,6 +113,17 @@ const UploadJob = () => {
               error={errors.jobTitle ? errors.jobTitle?.message : ""}
             />
 
+            <SelectCategory
+              name='category'
+              label='Category'
+              options = {jobCategories}
+              required={true}
+              register={register("category", {
+                required: "Category is required",
+              })}
+              error={errors.category ? errors.category?.message : ""}
+            />
+
             <div className='w-full flex gap-4'>
               <div className={`w-1/2 mt-2`}>
                 <label className='text-gray-600 text-sm mb-1'>Job Type</label>
@@ -108,8 +133,8 @@ const UploadJob = () => {
               <div className='w-1/2'>
                 <TextInput
                   name='salary'
-                  label='Salary (USD)'
-                  placeholder='eg. 1500'
+                  label='Salary (NPR)'
+                  placeholder='eg. 15000'
                   type='number'
                   register={register("salary", {
                     required: "Salary is required",
@@ -150,7 +175,7 @@ const UploadJob = () => {
             <TextInput
               name='location'
               label='Job Location'
-              placeholder='eg. New York'
+              placeholder='eg. Pokhara'
               type='text'
               register={register("location", {
                 required: "Job Location is required",
@@ -162,7 +187,7 @@ const UploadJob = () => {
                 Job Description
               </label>
               <textarea
-                className='rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none'
+                className='rounded border border-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-base px-4 py-2 resize-none'
                 rows={4}
                 cols={6}
                 {...register("desc", {
@@ -182,7 +207,7 @@ const UploadJob = () => {
                 Requirements
               </label>
               <textarea
-                className='rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none'
+                className='rounded border border-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-base px-4 py-2 resize-none'
                 rows={4}
                 cols={6}
                 {...register("requirements")}
@@ -201,7 +226,7 @@ const UploadJob = () => {
                 ):(
                   <CustomButton
                     type='submit'
-                    containerStyles='inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none '
+                    containerStyles='inline-flex justify-center rounded-md border border-transparent bg-primary px-8 py-2 text-sm font-medium text-white hover:bg-tertiary focus:outline-none '
                     title='Sumbit'
                   />
                 )

@@ -19,7 +19,7 @@ const CompanyCard = ({ cmp }) => {
           >
             {cmp?.name}
           </Link>
-          <span className='text-sm text-blue-600'>{cmp?.email}</span>
+          <span className='text-sm text-primary'>{cmp?.email}</span>
         </div>
       </div>
 
@@ -28,7 +28,7 @@ const CompanyCard = ({ cmp }) => {
       </div>
 
       <div className='w-1/4 h-full flex flex-col items-center'>
-        <p className='text-blue-600 font-semibold'>{cmp?.jobPosts?.length}</p>
+        <p className='text-primary font-semibold'>{cmp?.jobPosts?.length}</p>
         <span className='text-xs md:base font-normal text-gray-600'>
           Jobs Posted
         </span>

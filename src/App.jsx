@@ -1,7 +1,8 @@
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { Footer, Header, Navbar,SignUp} from "./components";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import SignUp from "./Pages/Auth/Signup/Signup";
 import {
@@ -18,7 +19,11 @@ import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 import ContactUs from "./Pages/ContactUs";
 import Search from "./Pages/Search";
-import FraudAlert from "./Pages/FraudAlert";
+import FraudAlert from "./pages/FraudAlert";
+import CVUpload from "./Pages/CVUpload";
+import SecurityAdvice from "./Pages/SecurityAdvice";
+import Applicants from "./Pages/Applicants";
+import CVView from "./Pages/CVView";
 // import Footer2 from "./components/Footer/Footer2";
 
 function Layout() {
@@ -36,6 +41,18 @@ function App() {
   const { user } = useSelector((state) => state.user);
   return (
     <>
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     <Navbar />
     <main className='bg-Background font-custom' >
       <Routes>
@@ -44,11 +61,14 @@ function App() {
           <Route path='/' element={<Navigate to='/find-jobs' replace={true} />}/>
           <Route path='/find-jobs' element={<FindJobs />} />
           <Route path='/companies' element={<Companies />} />
+          <Route path='/user/upload-cv' element={<CVUpload />}/>
+          <Route path="/user/:userId/view-cv" element={<CVView />} />
           <Route path={user?.accountType === "seeker"? "/user-profile": "/user-profile/:id"}element={<UserProfile />}/>
           <Route path={"/company-profile"} element={<CompanyProfile />} />
           <Route path={"/company-profile/:id"} element={<CompanyProfile />} />
           <Route path={"/upload-job"} element={<UploadJob />} />
-          <Route path={"/job-detail/:id"} element={<JobDetail />} /> 
+          <Route path={"/job-detail/:id"} element={<JobDetail />}></Route>
+          <Route path={"/job-detail/:id/applicants"} element={<Applicants />} />
           <Route path={"/search-result"} element={<Search />} />
         </Route>
         
@@ -56,6 +76,7 @@ function App() {
         <Route path={"/login"} element={<AuthPage/>} />
         <Route path={"/contact-us"} element={<ContactUs />} />
         <Route path={"/fraudalert"} element={<FraudAlert />} />
+        <Route path={"/security-advice"} element={<SecurityAdvice />} />
         <Route path='/about-us' element={<About />} />
         <Route path='/user-auth' element={<AuthPage />} />
       </Routes>

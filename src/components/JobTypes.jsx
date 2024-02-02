@@ -2,14 +2,14 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck2, BsChevronExpand } from "react-icons/bs";
 
-const types = ["Full-Time", "Part-Time", "Contract", "Intern"];
+const types = ["Full-Time", "Part-Time","Intern","Remote"];
 
 export default function JobTypes({ jobTitle, setJobTitle }) {
   return (
     <div className='w-full '>
       <Listbox value={jobTitle} onChange={setJobTitle}>
         <div className='relative'>
-          <Listbox.Button className='relative w-full cursor-default rounded bg-white py-2.5 pl-3 pr-10 text-left focus:outline-none border border-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500  sm:text-sm'>
+          <Listbox.Button className='relative w-full cursor-default rounded bg-white py-2.5 pl-3 pr-10 text-left focus:outline-none border border-gray-400 focus:border-primary focus:ring-1 focus:ring-primary  sm:text-sm'>
             <span className='block truncate'>{jobTitle}</span>
             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
               <BsChevronExpand
@@ -30,7 +30,7 @@ export default function JobTypes({ jobTitle, setJobTitle }) {
                   key={index}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                      active ? "bg-secondary/25 text-primary" : "text-black"
                     }`
                   }
                   value={type}
@@ -45,7 +45,7 @@ export default function JobTypes({ jobTitle, setJobTitle }) {
                         {type}
                       </span>
                       {selected ? (
-                        <span className='absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600'>
+                        <span className='absolute inset-y-0 left-0 flex items-center pl-3 text-primary'>
                           <BsCheck2 className='h-5 w-5' aria-hidden='true' />
                         </span>
                       ) : null}

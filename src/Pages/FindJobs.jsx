@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BiBriefcaseAlt2 } from "react-icons/bi";
 import { BsStars } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-
+import Banner from "../components/Banner"
 import Header from "../components/Header";
 import { experience, jobTypes, jobs } from "../utils/data";
 import { CustomButton, JobCard, ListBox, Loading } from "../components";
@@ -19,7 +19,7 @@ const FindJobs = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   const [filterJobTypes, setFilterJobTypes] = useState([]);
-  const [filterExp, setFilterExp] = useState([]);
+  const [filterExp, setFilterExp] = useState("");
   const [expVal, setExpVal] = useState([]);
 
   const [isFetching, setIsFetching] = useState(false);
@@ -100,9 +100,41 @@ const FindJobs = () => {
     fetchJobs();
   }, [sort, filterJobTypes, filterExp, page]);
 
+  function handleCheckboxChange(checkboxValue, isChecked) {
+    // Assuming you have an array to keep track of checked checkboxes
+    const checkedCheckboxes = [];
+
+    // Update the array based on checkbox changes
+    if (isChecked) {
+      checkedCheckboxes.push(checkboxValue);
+    } else {
+      const index = checkedCheckboxes.indexOf(checkboxValue);
+      if (index !== -1) {
+        checkedCheckboxes.splice(index, 1);
+      }
+    }
+
+    // Find the highest value among the checked checkboxes
+    const highestValue = Math.max(...checkedCheckboxes, 0);
+
+    // Use highestValue as needed (store it in filterExp variable, etc.)
+    console.log("Filter Experience:", highestValue);
+    if(highestValue == 1)
+      setFilterExp("0-1");
+    else if(highestValue == 2)
+      setFilterExp("1-2");
+    else if(highestValue == 3)
+      setFilterExp("2-6");
+    else if(highestValue == 4)
+      setFilterExp("6");
+    else 
+      setFilterExp(null);
+  }
+
   return (
     <div>
-      <Header
+    <Banner/>
+      {/* <Header
         title='Find Your Dream Job with Ease'
         type='home'
         handleClick={handleSearchSubmit}
@@ -110,12 +142,11 @@ const FindJobs = () => {
         setSearchQuery={setSearchQuery}
         location={jobLocation}
         setLocation={setJobLocation}
-      />
+      /> */}
 
-      <div className='container mx-auto flex gap-6 2xl:gap-10 md:px-5 py-0 md:py-6 bg-[#f7fdfd]'>
+      <div className='container flex gap-6 2xl:gap-10 md:px-5 py-0 md:py-6 bg-Background mx-auto'>
         <div className='hidden md:flex flex-col w-1/6 h-fit bg-white shadow-sm'>
           <p className='text-lg font-semibold text-slate-600'>Filter Search</p>
-
           <div className='py-2'>
             <div className='flex justify-between mb-3'>
               <p className='flex items-center gap-2 font-semibold'>
@@ -162,7 +193,7 @@ const FindJobs = () => {
                     type='checkbox'
                     value={exp?.value}
                     className='w-4 h-4'
-                    onChange={(e) => filterExperience(e.target.value)}
+                    onChange={(e) => handleCheckboxChange(exp.numValue, e.target.checked)}
                   />
                   <span>{exp.title}</span>
                 </div>
@@ -210,7 +241,7 @@ const FindJobs = () => {
               <CustomButton
                 title='Load More'
                 onClick={handleShowMore}
-                containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
+                containerStyles={`text-primary py-1.5 px-5 focus:outline-none hover:bg-primary hover:text-white rounded-full text-base border border-primary`}
               />
             </div>
           )}
